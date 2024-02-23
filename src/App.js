@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import allMovies from "./data";
+import { useState, useEffect } from "react";
 function App() {
+  const [searchingText, setSearchingText] = useState("");
+  useEffect(() => {
+    console.log("jebau som ti mať");
+  }, [searchingText]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <input
+          type="input"
+          placeholder="Zadaj text"
+          onChange={(e) => setSearchingText(e.target.value)}
+        />
+      </form>
+      <div>
+        {allMovies.map((oneMovie) => {
+          const { id, title, image, age, tags, description } = oneMovie;
+          return (
+            <div key={id}>
+              <img src={image} alt={description} />
+              <h2>{title}</h2>
+              <p>{age}</p>
+              <p>{tags}</p>
+              <p>{description}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
